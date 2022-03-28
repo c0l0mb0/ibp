@@ -1,0 +1,7 @@
+{
+    "require": {
+        "illuminate/session": "^5.8",
+        "components/jquery": "3.6.0",
+        "twbs/bootstrap": "^5.1"
+    }
+}
