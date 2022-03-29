@@ -22,7 +22,7 @@ function readProductsTemplate(data, keywords){
     $.each(data, function(key, val) {
 
         // создание новой строки таблицы для каждой записи
-        read_products_html+=`<tr>
+        read_products_html+=`<tr class="id outer`+ val.key+`">
             <td>` + val.place_first_lev + `</td>
             <td>` + val.place_third_lev + `</td>
             <td>` + val.affiliate + `</td>

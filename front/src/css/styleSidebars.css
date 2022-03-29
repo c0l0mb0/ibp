@@ -3,6 +3,7 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -15,7 +16,6 @@ p {
     line-height: 1.7em;
     color: #999;
 }
-
 
 
 a,
@@ -31,7 +31,7 @@ a:focus {
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 
 }
@@ -97,7 +97,7 @@ a:focus {
     background: #fff;
 }
 
-#sidebar ul li.active>a,
+#sidebar ul li.active > a,
 a[aria-expanded="true"] {
     color: #fff;
     background: #6d7fcc;
@@ -149,11 +149,27 @@ a.article:hover {
 ----------------------------------------------------- */
 
 #content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding: 20px;
-    min-height: 100vh;
+    padding-top: 20px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    height: 100vh;
     transition: all 0.3s;
+    overflow: auto;
 }
+
+.scroll {
+    /*height: 100av;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+#app {
+    height: 100%;
+}
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES

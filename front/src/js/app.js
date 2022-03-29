@@ -5,7 +5,7 @@ jQuery(function($){
     });
     // HTML приложения
     var app_html=`
-        <div class='container'>
+        <div class='app-container'>
 
             <div class='page-header'>
                 <h1 id='page-title'>Оборудование</h1>
