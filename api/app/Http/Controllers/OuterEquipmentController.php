@@ -41,6 +41,15 @@ class OuterEquipmentController extends Controller
 //
 //    }
 
+    public function listOfOuterObjects()
+    {
+        $outerEquipments = DB::table('outer_equipment')
+            ->select('place_first_lev')
+            ->get();
+        return response()->json($outerEquipments);
+
+    }
+
 
     private function indicesToEditOuterInnerEquip(&$equipment)
     {
@@ -95,10 +104,7 @@ class OuterEquipmentController extends Controller
             array("factory_number_inner", "factory_number_outer", "factory_number"),
             array("year_issue_inner", "year_issue_outer", "year_issue"),
             array("state_tech_condition_inner", "state_tech_condition_outer", "state_tech_condition"));
-//        for ($i = 0; $i < count($equipment); $i++) {
-//
-//
-//        }
+
         for ($i = 0; $i < count($equipment); $i++) {
             foreach ($columnsToMergeСouples as $columnsToMergeСouple) {
 

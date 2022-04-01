@@ -16,6 +16,7 @@ function readProductsTemplate(data, keywords){
                 <th class='w-15-pct'>Количество</th>
                 <th class='w-15-pct'>Выпуск</th>
                 <th class='w-15-pct'>Состояние</th>
+                <th class='w-15-pct'>Редактирование</th>
             </tr>`;
 
     // перебор возвращаемого списка данных
@@ -32,6 +33,14 @@ function readProductsTemplate(data, keywords){
             <td>` + val.quant  + `</td>
             <td>` + val.year_issue + `</td>
             <td>` + val.state_tech_condition  + `</td>
+            <td class = "equip_info">    
+                <div class="equip_info-inner">
+                    <button class='btn btn-primary read-one-equip-button' data-id='\` + val.id + \`'>
+                       <img src="src/icon/arrow-return-left.svg"> 
+                    </button>
+                </div>
+<!--                <button type="button" className="" data-id='` + val.id + `'>Просмотр</button>-->
+            </td>
         </tr>`;
     });
 
@@ -40,4 +49,16 @@ function readProductsTemplate(data, keywords){
 
     // добавим в «page-content» нашего приложения
     $("#page-content").html(read_products_html);
+}
+function createListOfObjects (data, keywords){
+    var listOfObjectsHtml='';
+
+    $.each(data, function(key, val) {
+        listOfObjectsHtml +=`<li>
+                                <a href="#">`+val.place_first_lev+`</a>
+                             </li>`
+    });
+
+    $(".list_of_objects").html(listOfObjectsHtml);
+
 }

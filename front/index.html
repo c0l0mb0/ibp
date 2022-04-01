@@ -6,8 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="src/css/styleSidebars.css">
-    <link rel="stylesheet" href="src/css/app.css">
+    <link rel="stylesheet" href="src/css/Index.css">
 
 
 </head>
@@ -16,31 +15,42 @@
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar" class="sticky-sm-top">
-        <div class="sidebar-header">
-            <h3>База ИБП</h3>
+        <div class="sidebar-container">
+            <div class="sidebar-header">
+                <h3>База ИБП</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#">Главная</a>
+                </li>
+
+                <li>
+                    <a href="#">Капремонт</a>
+                </li>
+                <li>
+                    <a href="#">ТОиР</a>
+                </li>
+                <li>
+                    <a href="#">ПЭН/РЭН АКБ</a>
+                </li>
+                <li>
+                    <a href="#">Акты ТРО</a>
+                </li>
+                <li>
+                    <a href="#">График ТО</a>
+                </li>
+                <li class="active objects_first_lev" >
+                    <a href="#homeSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Объекты</a>
+                    <div class="">
+                        <ul class="list-unstyled collapse show scroll-strict_height list_of_objects" id="homeSubmenu">
+                        </ul>
+                    </div>
+
+                </li>
+            </ul>
         </div>
 
-        <ul class="list-unstyled components">
-            <li>
-                <a href="#">Главная</a>
-            </li>
-
-            <li>
-                <a href="#">Капремонт</a>
-            </li>
-            <li>
-                <a href="#">ТОиР</a>
-            </li>
-            <li>
-                <a href="#">ПЭН/РЭН АКБ</a>
-            </li>
-            <li>
-                <a href="#">Акты ТРО</a>
-            </li>
-            <li>
-                <a href="#">График ТО</a>
-            </li>
-        </ul>
 
     </nav>
 
@@ -71,7 +81,7 @@
     </div>
 </div>
 
-
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
 <script defer src="../vendor/fontawesome/solid.js"></script>
 <script defer src="../vendor/fontawesome/fontawesome.js"></script>
 

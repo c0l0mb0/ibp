@@ -1,11 +1,8 @@
 jQuery(function ($) {
-    showProducts();
-    $(document).on('click', '.read-products-button', function () {
-        showProducts();
-    });
+    showEquipment();
 });
 
-function showProducts() {
+function showEquipment() {
     // получаем список товаров из API
     $.getJSON("http://ibp/api/public/index.php/api/v1/outerinnerequip", function(data){
 
@@ -14,6 +11,13 @@ function showProducts() {
 
         // изменяем заголовок страницы
         changePageTitle("Оборудовние и компоненты");
+
+    });
+    $.getJSON("http://ibp/api/public/index.php/api/v1/listofobjects", function(data){
+
+        // HTML для перечисления товаров
+        createListOfObjects(data, "");
+
 
     });
 }

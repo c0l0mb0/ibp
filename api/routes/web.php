@@ -19,6 +19,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('login/','UsersController@authenticate');
 
     $router->get('/outerequipall', 'OuterEquipmentController@index');
+    $router->get('/listofobjects', 'OuterEquipmentController@listOfOuterObjects');
     $router->get('/outerinnerequip', 'OuterEquipmentController@indexOuterAndInner');
     $router->post('/outerequip', 'OuterEquipmentController@create');
     $router->get('/outerequip/{id}', 'OuterEquipmentController@show');
