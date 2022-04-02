@@ -3,6 +3,10 @@ jQuery(function($){
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+
+    $('.all-equip').on('click', function () {
+        getAllEquipment();
+    });
     // HTML приложения
     var app_html=`
         <div class='app-container'>

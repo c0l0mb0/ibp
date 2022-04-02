@@ -41,15 +41,6 @@ class OuterEquipmentController extends Controller
 //
 //    }
 
-    public function listOfOuterObjects()
-    {
-        $outerEquipments = DB::table('outer_equipment')
-            ->select('place_first_lev')
-            ->get();
-        return response()->json($outerEquipments);
-
-    }
-
 
     private function indicesToEditOuterInnerEquip(&$equipment)
     {
@@ -82,7 +73,7 @@ class OuterEquipmentController extends Controller
     private function shiftDownByOneRowInner(&$equipment)
     {
         $InnerEquipFieldsToShift = array('inner_name', 'factory_number_inner', 'quant',
-            'year_issue_inner', 'state_tech_condition_inner');
+            'year_issue_inner', 'state_tech_condition_inner','id_inner_equip');
         $tmp = "";
 
         for ($i = count($equipment) - 1; $i > 0; $i--) {
@@ -189,6 +180,7 @@ class OuterEquipmentController extends Controller
 
     public function indexOuterAndInner()
     {
+//        $firstEquip = OuterEquipment::find($id);
         $outerEquipment = DB::table('outer_equipment')
             ->select(DB::raw('id_outer_equip , id_inner_equip, place_zero_lev, place_first_lev, place_third_lev, affiliate,
 	equip_name,  inner_name, outer_equipment.factory_number as factory_number_outer ,
@@ -197,20 +189,55 @@ class OuterEquipmentController extends Controller
 	inner_equipment.state_tech_condition as state_tech_condition_inner,
 	outer_equipment.state_tech_condition as state_tech_condition_outer'))
             ->leftJoin('inner_equipment', 'outer_equipment.id_outer_equip', '=', 'inner_equipment.id_outer')
+            ->leftJoin('buildings', 'outer_equipment.id_build', '=', 'buildings.id_build')
             ->orderBy('id_outer_equip', 'ASC')
             ->get();
 
-        $toDeleteIndices = $this->indicesToEditOuterInnerEquip($outerEquipment);
-        $this->clearRepeatedOuterEquipFields($outerEquipment, $toDeleteIndices);
-        $this->AddEmptyRowsOuterInnerEquip($outerEquipment);
-
-        $this->shiftDownByOneRowInner($outerEquipment);
-        $this->replaceAllNullValues($outerEquipment);
-        $this->mergeColumns($outerEquipment);
+        $this->formatInnerOuterArray($outerEquipment);
 
 
         return response()->json($outerEquipment);
 
+    }
+
+    private function formatInnerOuterArray (&$equipment) {
+        if (count($equipment) > 0) {
+            $toDeleteIndices = $this->indicesToEditOuterInnerEquip($equipment);
+            if ($toDeleteIndices <> 0) {
+                $this->clearRepeatedOuterEquipFields($equipment, $toDeleteIndices);
+            }
+
+            $this->AddEmptyRowsOuterInnerEquip($equipment);
+            $this->shiftDownByOneRowInner($equipment);
+            $this->replaceAllNullValues($equipment);
+            $this->mergeColumns($equipment);
+
+        }
+    }
+
+    public function indexOuterAndInnerByFirstLevValue(Request $request)
+    {
+        $this->validate($request, [
+            'place_first_lev' => 'required'
+        ]);
+
+        $outerEquipment = DB::table('outer_equipment')
+            ->select(DB::raw('id_outer_equip , id_inner_equip, place_zero_lev, place_first_lev, place_third_lev, affiliate,
+	equip_name,  inner_name, outer_equipment.factory_number as factory_number_outer ,
+	inner_equipment.faсtory_number as factory_number_inner,
+	quant, inner_equipment.year_issue as year_issue_inner, outer_equipment.year_issue as year_issue_outer,
+	inner_equipment.state_tech_condition as state_tech_condition_inner,
+	outer_equipment.state_tech_condition as state_tech_condition_outer'))
+            ->leftJoin('inner_equipment', 'outer_equipment.id_outer_equip', '=', 'inner_equipment.id_outer')
+            ->leftJoin('buildings', 'outer_equipment.id_build', '=', 'buildings.id_build')
+            ->where('place_first_lev', $request->place_first_lev)
+            ->orderBy('id_outer_equip', 'ASC')
+            ->get();
+
+       $this->formatInnerOuterArray($outerEquipment);
+
+
+        return response()->json($outerEquipment);
     }
 
     public function create(Request $request)

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\InnerEquipment;
+use App\Buildings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class InnerEquipmentController extends Controller
+class BuildingsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,42 +17,52 @@ class InnerEquipmentController extends Controller
     public function index()
     {
 
-        $innerEquipments = InnerEquipment::all();
+        $buildings = Buildings::all();
 
-        return response()->json($innerEquipments);
+        return response()->json($buildings);
+
+    }
+
+    public function listOfObjects()
+    {
+        $place_first_lev = DB::table('buildings')
+            ->select('place_first_lev')
+            ->distinct()
+            ->get();
+        return response()->json($place_first_lev);
 
     }
 
 
     public function create(Request $request)
     {
-        $innerEquipments = InnerEquipment::create($request->all());
+        $buildings = Buildings::create($request->all());
 
-        return response()->json($innerEquipments);
+        return response()->json($buildings);
     }
 
     public function show($id)
     {
-        $innerEquipments = InnerEquipment::find($id);
+        $buildings = Buildings::find($id);
 
-        return response()->json($innerEquipments);
+        return response()->json($buildings);
     }
 
     public function update($id, Request $request )
     {
-        $innerEquipments= InnerEquipment::find($id);
+        $buildings= Buildings::find($id);
 
-        $innerEquipments->update($request->all());
+        $buildings->update($request->all());
 
-        return response()->json($innerEquipments);
+        return response()->json($buildings);
     }
 
     public function destroy($id)
     {
-        $innerEquipments = InnerEquipment::find($id);
-        $innerEquipments->delete();
+        $buildings = Buildings::find($id);
+        $buildings->delete();
 
-        return response()->json('InnerEquipment removed successfully');
+        return response()->json('Buildings removed successfully');
     }
 
 

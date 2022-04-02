@@ -1,24 +1,44 @@
 jQuery(function ($) {
-    showEquipment();
+    getAllEquipment();
+    getBuildingsFirstLevel();
 });
 
-function showEquipment() {
-    // получаем список товаров из API
-    $.getJSON("http://ibp/api/public/index.php/api/v1/outerinnerequip", function(data){
+function getAllEquipment() {
+    $.getJSON("http://ibp/api/public/index.php/api/v1/outerinnerequip", function (data) {
 
-        // HTML для перечисления товаров
-        readProductsTemplate(data, "");
+        renderOuterInterTable(data, "");
 
-        // изменяем заголовок страницы
-        changePageTitle("Оборудовние и компоненты");
+        changePageTitle("Все оборудовние и компоненты");
 
     });
-    $.getJSON("http://ibp/api/public/index.php/api/v1/listofobjects", function(data){
 
-        // HTML для перечисления товаров
+}
+
+function getBuildingsFirstLevel() {
+    $.getJSON("http://ibp/api/public/index.php/api/v1/listofobjects", function (data) {
+
         createListOfObjects(data, "");
 
-
     });
+}
+
+function getEquipmentByFirstLevelName(FirstLevelName) {
+
+
+    $.ajax({
+        url: "http://ibp/api/public/index.php/api/v1/indexouterandinnerbyfirstlevvalue",
+        type: "POST",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({"place_first_lev": FirstLevelName}),
+        success: function (data) {
+            renderOuterInterTable(data);
+        }, error: function (xhr, resp, text) {
+            // console.log(xhr, resp, text);
+        }
+    });
+
+    changePageTitle("Оборудовние и компоненты " + FirstLevelName);
+
 }
 

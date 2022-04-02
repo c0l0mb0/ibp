@@ -19,8 +19,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('login/','UsersController@authenticate');
 
     $router->get('/outerequipall', 'OuterEquipmentController@index');
-    $router->get('/listofobjects', 'OuterEquipmentController@listOfOuterObjects');
+
     $router->get('/outerinnerequip', 'OuterEquipmentController@indexOuterAndInner');
+    $router->post('/indexouterandinnerbyfirstlevvalue', 'OuterEquipmentController@indexOuterAndInnerByFirstLevValue');
+
     $router->post('/outerequip', 'OuterEquipmentController@create');
     $router->get('/outerequip/{id}', 'OuterEquipmentController@show');
     $router->put('/outerequip/{id}', 'OuterEquipmentController@update');
@@ -31,6 +33,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('/innerequip/{id}', 'InnerEquipmentController@show');
     $router->put('/innerequip/{id}', 'InnerEquipmentController@update');
     $router->delete('/innerequip/{id}', 'InnerEquipmentController@destroy');
+
+    $router->get('/listofobjects', 'BuildingsController@listOfObjects');
 
 
 });
