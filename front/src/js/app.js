@@ -6,7 +6,16 @@ jQuery(function($){
 
     $('.all-equip').on('click', function () {
         getAllEquipment();
+
     });
+
+    $('.edit_equip').on('click', function () {
+        getAllOuterEquipmentAndParameters();
+    });
+    $('.new-table-row').hide();
+    $('.delete-table-row').hide();
+    $('.show-inner').hide();
+
     // HTML приложения
     var app_html=`
         <div class='app-container'>
@@ -22,6 +31,7 @@ jQuery(function($){
 
     // вставка кода на страницу
     $("#app").html(app_html);
+
 
 });
 

@@ -21,10 +21,11 @@ class OuterEquipmentController extends Controller
 //        isset($_SESSION['userId']) && $_SESSION['userId'] != '';
 
 //        if ($request->session()->get('id')!="") {
-        $outerEquipments = OuterEquipment::all();
-//            return response()->json($outerEquipments);
+        $outerEquipments = OuterEquipment::all()->sortBy("id_outer_equip");
+//        $outerEquipments;
+        return response()->json($outerEquipments);
 //        }else{
-        return response()->json('access denied');
+//        return response()->json('access denied');
 //        }
 
 
@@ -73,7 +74,7 @@ class OuterEquipmentController extends Controller
     private function shiftDownByOneRowInner(&$equipment)
     {
         $InnerEquipFieldsToShift = array('inner_name', 'factory_number_inner', 'quant',
-            'year_issue_inner', 'state_tech_condition_inner','id_inner_equip');
+            'year_issue_inner', 'state_tech_condition_inner', 'id_inner_equip');
         $tmp = "";
 
         for ($i = count($equipment) - 1; $i > 0; $i--) {
@@ -156,18 +157,6 @@ class OuterEquipmentController extends Controller
         return $equipment;
     }
 
-//    private function addRowsOuterEquipFields(&$Equipment, &$toAddNewRowIndices)
-//    {
-//        $fieldsToClear = array('place_zero_lev', 'place_first_lev', 'affiliate', 'equip_name', 'factory_number_outer',
-//            'year_issue_outer', 'state_tech_condition_outer');
-//        foreach ($toDeleteKeys as &$toClearKey) {
-//            foreach ($fieldsToClear as &$fieldToClear) {
-//                $Equipment[$toClearKey]->$fieldToClear = "";
-//            }
-//
-//        }
-//        return $Equipment;
-//    }
 
     public function replaceAllNullValues(&$equipment)
     {
@@ -200,7 +189,8 @@ class OuterEquipmentController extends Controller
 
     }
 
-    private function formatInnerOuterArray (&$equipment) {
+    private function formatInnerOuterArray(&$equipment)
+    {
         if (count($equipment) > 0) {
             $toDeleteIndices = $this->indicesToEditOuterInnerEquip($equipment);
             if ($toDeleteIndices <> 0) {
@@ -214,6 +204,7 @@ class OuterEquipmentController extends Controller
 
         }
     }
+
 
     public function indexOuterAndInnerByFirstLevValue(Request $request)
     {
@@ -234,7 +225,7 @@ class OuterEquipmentController extends Controller
             ->orderBy('id_outer_equip', 'ASC')
             ->get();
 
-       $this->formatInnerOuterArray($outerEquipment);
+        $this->formatInnerOuterArray($outerEquipment);
 
 
         return response()->json($outerEquipment);
