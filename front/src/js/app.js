@@ -1,4 +1,4 @@
-jQuery(function($){
+jQuery(function ($) {
     // side bar
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
@@ -16,7 +16,7 @@ jQuery(function($){
     $('.delete-table-row').hide();
     $('.show-inner').hide();
 
-    var app_html=`
+    var app_html = `
         <div class='app-container'>
 
             <div class='page-header'>
@@ -29,17 +29,16 @@ jQuery(function($){
 
     $("#app").html(app_html);
 
-
 });
 
 // изменение заголовка страницы
-function changePageTitle(page_title){
+function changePageTitle(page_title) {
 
     // измение заголовка страницы
     $('#page-title').text(page_title);
 
     // измение заголовка вкладки браузера
-    document.title=page_title;
+    document.title = page_title;
 }
 
 
