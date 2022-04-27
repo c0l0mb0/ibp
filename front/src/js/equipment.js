@@ -1,4 +1,3 @@
-// html список товаров
 function renderOuterInterTableStatement(data, keywords) {
 
     var read_products_html = `
@@ -18,7 +17,6 @@ function renderOuterInterTableStatement(data, keywords) {
                 <th class='w-15-pct'>Состояние</th>
             </tr>`;
 
-    // перебор возвращаемого списка данных
     $.each(data, function (key, val) {
         let equipmentId = {
             idType: "",
@@ -140,7 +138,7 @@ function renderOuterTableStatement(data, keywords) {
 }
 
 
-function createListOfObjects(data, keywords) {
+function createListOfObjects(data) {
     var listOfObjectsHtml = '';
 
     $.each(data, function (key, val) {
@@ -160,4 +158,16 @@ function createListOfObjects(data, keywords) {
         if (placeFirstLevel !== "") getEquipmentByFirstLevelName(placeFirstLevel);
 
     });
+}
+
+function createNewEquipSelectOptions(data) {
+    let selectHtml = '';
+    let counter = 0;
+
+    $.each(data, function (key, val) {
+        selectHtml += `<option value="` + counter + `">` + val.place_first_lev + `</option>`
+        counter++;
+    });
+
+    $(".modal__place_first_lev-select").append(selectHtml);
 }

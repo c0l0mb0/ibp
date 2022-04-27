@@ -29,7 +29,9 @@ function getAllOuterEquipmentAndParameters() {
 function getBuildingsFirstLevel() {
     $.getJSON("http://ibp/api/public/index.php/api/v1/listofobjects", function (data) {
 
-        createListOfObjects(data, "");
+        createListOfObjects(data);
+
+        createNewEquipSelectOptions(data);
 
     });
 }

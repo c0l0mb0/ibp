@@ -16,7 +16,6 @@ jQuery(function($){
     $('.delete-table-row').hide();
     $('.show-inner').hide();
 
-    // HTML приложения
     var app_html=`
         <div class='app-container'>
 
@@ -24,12 +23,10 @@ jQuery(function($){
                 <h1 id='page-title'>Оборудование</h1>
             </div>
 
-            <!-- здесь будет показано содержимое -->
             <div id='page-content'></div>
 
         </div>`;
 
-    // вставка кода на страницу
     $("#app").html(app_html);
 
 
