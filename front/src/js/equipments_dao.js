@@ -1,39 +1,16 @@
-jQuery(function ($) {
-    getAllEquipment();
-    getBuildingsFirstLevel();
-});
-
-function getAllEquipment() {
-    $.getJSON("http://ibp/api/public/index.php/api/v1/outerinnerequip", function (data) {
-
-        renderOuterInterTableStatement(data, "");
-
-        changePageTitle("Все оборудовние и компоненты");
-
+function getData (url) {
+    var data = {};
+    $.ajax({
+        url: url,
+        type: 'GET',
+        async: false,
+        dataType: 'json'
+    }).done(function (response) {
+        data = response;
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        data = null;
     });
-
-}
-
-function getAllOuterEquipmentAndParameters() {
-    $.getJSON("http://ibp/api/public/index.php/api/v1/outerequipall", function (data) {
-
-        renderOuterTableStatement(data, "");
-
-        changePageTitle("Приборы");
-
-    });
-
-}
-
-
-function getBuildingsFirstLevel() {
-    $.getJSON("http://ibp/api/public/index.php/api/v1/listofobjects", function (data) {
-
-        createListOfObjects(data);
-
-        createNewEquipSelectOptions(data);
-
-    });
+    return data;
 }
 
 function setOuterEquipmentRowById(idRow, data) {
@@ -54,7 +31,6 @@ function setOuterEquipmentRowById(idRow, data) {
 
 function getEquipmentByFirstLevelName(FirstLevelName) {
 
-
     $.ajax({
         url: "http://ibp/api/public/index.php/api/v1/indexouterandinnerbyfirstlevvalue",
         type: "POST",
@@ -67,8 +43,5 @@ function getEquipmentByFirstLevelName(FirstLevelName) {
             // console.log(xhr, resp, text);
         }
     });
-
-    changePageTitle("Оборудовние и компоненты " + FirstLevelName);
-
 }
 

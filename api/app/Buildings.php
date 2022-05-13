@@ -8,6 +8,10 @@ class Buildings extends Model
 
 {
     protected $primaryKey = 'id_build';
-    protected $fillable = [ 'place_zero_lev', 'place_first_lev', 'place_second_lev', 'place_third_lev'];
+    protected $fillable = ['place_zero_lev', 'place_first_lev', 'place_second_lev', 'place_third_lev'];
 
+    public function buildings()
+    {
+        return $this->hasMany(Buildings::class, 'build_id','id_build' );
+    }
 }

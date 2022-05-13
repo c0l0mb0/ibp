@@ -24,9 +24,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('/indexouterandinnerbyfirstlevvalue', 'OuterEquipmentController@indexOuterAndInnerByFirstLevValue');
 
     $router->post('/outerequip', 'OuterEquipmentController@create');
+    $router->post('/outerequipwithlocation', 'OuterEquipmentController@createWithLocation');
     $router->get('/outerequip/{id}', 'OuterEquipmentController@show');
     $router->put('/outerequip/{id}', 'OuterEquipmentController@update');
     $router->delete('/outerequip/{id}', 'OuterEquipmentController@destroy');
+    $router->delete('/outerequipwithlocation/{id}', 'OuterEquipmentController@destroyOuterEquipAndItsLocation');
 
     $router->get('/innerequipall', 'InnerEquipmentController@index');
     $router->post('/innerequip', 'InnerEquipmentController@create');

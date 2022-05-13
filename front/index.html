@@ -64,7 +64,7 @@
                 </button>
                 <div class="row-menue">
                     <button type="button" class="btn new-table-row" data-bs-toggle="modal" data-bs-trigger="hover"
-                            data-bs-placement="bottom" title="Добавить" data-bs-target="#exampleModal">
+                            data-bs-placement="bottom" title="Добавить" data-bs-target="#modal-new-equip">
                         <img src="src/icon/plus-svgrepo-com.svg" class="row-menue__icon">
                     </button>
                     <button type="button" class="btn show-inner" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -118,22 +118,29 @@
         <div id="app" class="scroll"></div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-new-equip" tabindex="-1" aria-labelledby="modal-new-equipLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавить прибор</h5>
+                    <h5 class="modal-title" id="modal-new-equipLabel">Добавить прибор</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="needs-validation">
+                <form class="modal-form needs-validation" id="form_outer-equipment-and-location">
                     <div class="modal-body">
-
+                        <div class="row p-2">
+                            <div class="col-3">
+                                <label for="place_zero_lev" class="col-form-label">Уренгой|Ямб</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="place_zero_lev" name="place_zero_lev">
+                            </div>
+                        </div>
                         <div class="row p-2">
                             <div class="col-3">
                                 <label for="place_first_lev" class="col-form-label">Расположение</label>
                             </div>
                             <div class="col-9">
-                                <select class="form-select modal__place_first_lev-select" id="place_first_lev">
+                                <select class="form-select modal__place_first_lev-select" id="place_first_lev" name="place_first_lev">
                                 </select>
                             </div>
                         </div>
@@ -142,7 +149,7 @@
                                 <label for="place_third_lev" class="col-form-label">Место</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="place_third_lev">
+                                <input type="text" class="form-control" id="place_third_lev" name="place_third_lev">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -150,7 +157,7 @@
                                 <label for="affiliate" class="col-form-label">Филиал</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="affiliate">
+                                <input type="text" class="form-control" id="affiliate" name="affiliate">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -158,7 +165,7 @@
                                 <label for="equip_name" class="col-form-label">Название</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="equip_name" required>
+                                <input type="text" class="form-control" id="equip_name" required name="equip_name">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -166,7 +173,7 @@
                                 <label for="factory_number" class="col-form-label">Зав.Номер</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="factory_number" required>
+                                <input type="text" class="form-control" id="factory_number" required name="factory_number">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -174,7 +181,7 @@
                                 <label for="factory_name" class="col-form-label">Изготовитель</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="factory_name">
+                                <input type="text" class="form-control" id="factory_name" name="factory_name">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -182,7 +189,7 @@
                                 <label for="inventory_number" class="col-form-label">Инв.Номер</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="inventory_number">
+                                <input type="text" class="form-control" id="inventory_number" name="inventory_number">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -190,7 +197,7 @@
                                 <label for="numb_vvod" class="col-form-label">Ном.ввода</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="numb_vvod">
+                                <input type="text" class="form-control" id="numb_vvod" name="numb_vvod">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -198,7 +205,7 @@
                                 <label for="purpose" class="col-form-label">Назначение</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="purpose">
+                                <input type="text" class="form-control" id="purpose" name="purpose">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -206,7 +213,7 @@
                                 <label for="year_issue" class="col-form-label">Выпуск</label>
                             </div>
                             <div class="col-9">
-                                <input type="date" class="form-control" id="year_issue">
+                                <input type="date" class="form-control" id="year_issue" name="year_issue">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -214,7 +221,7 @@
                                 <label for="year_exploitation" class="col-form-label">Эксплуатация</label>
                             </div>
                             <div class="col-9">
-                                <input type="date" class="form-control" id="year_exploitation">
+                                <input type="date" class="form-control" id="year_exploitation" name="year_exploitation">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -222,7 +229,7 @@
                                 <label for="power" class="col-form-label">Мощнсоть</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="power">
+                                <input type="text" class="form-control" id="power" name="power">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -230,7 +237,7 @@
                                 <label for="current" class="col-form-label">Ток</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="current">
+                                <input type="text" class="form-control" id="current" name="current">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -238,7 +245,7 @@
                                 <label for="voltage" class="col-form-label">Напруга</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="voltage">
+                                <input type="text" class="form-control" id="voltage" name="voltage">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -246,13 +253,18 @@
                                 <label for="state_tech_condition" class="col-form-label">Состояние</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="state_tech_condition">
+                                <input type="text" class="form-control" id="state_tech_condition" name="state_tech_condition">
                             </div>
                         </div>
                     </div>
+                    <div class="row" style="margin: 0;">
+                        <mark id="form_outer-equipment-and-location__error" class="inline-block secondary d-none" >Текст
+                            ошибки
+                        </mark>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="submit" class="btn btn-primary modal__sbmit">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -261,17 +273,15 @@
 </div>
 
 <script src="../vendor/ag grid/ag-grid-community.min.js"></script>
-<!--<script defer src="../vendor/fontawesome/solid.js"></script>-->
-<!--<script defer src="../vendor/fontawesome/fontawesome.js"></script>-->
-
 <script src="../vendor/components/jquery/jquery.min.js"></script>
 <script src="../vendor/popper/popper.min.js"></script>
 <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
-<!--<script src="../vendor/bootbox/bootbox.min.js"></script>-->
-<!--<script src="../vendor/bootbox/bootbox.locales.min.js"></script>-->
 
 <script src="src/js/app.js"></script>
-<script src="src/js/read-equipments.js"></script>
-<script src="src/js/equipment.js"></script>
+<script src="src/js/side_bar.js"></script>
+<script src="src/js/modal.js"></script>
+<script src="src/js/action_menu.js"></script>
+<script src="src/js/equipments_dao.js"></script>
+<script src="src/js/aggrid.js"></script>
 </body>
 </html>

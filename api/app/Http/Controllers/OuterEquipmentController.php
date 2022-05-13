@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Buildings;
 use App\OuterEquipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class OuterEquipmentController extends Controller
 {
+
+
     /**
      * Create a new controller instance.
      *
@@ -234,12 +236,39 @@ class OuterEquipmentController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'factory_number' => 'required'
+            'factory_number' => 'required',
+            'equip_name' => 'required'
         ]);
 
         $outerEquipment = OuterEquipment::create($request->all());
 
         return response()->json($outerEquipment);
+    }
+
+    public function createWithLocation(Request $request)
+    {
+        $this->validate($request, [
+            'factory_number' => 'required',
+            'equip_name' => 'required',
+            'place_first_lev' => 'required',
+            'place_third_lev' => 'required'
+        ]);
+
+
+        if (OuterEquipment::where('factory_number', $request->factory_number)->exists()) {
+            return ('factory_number already exists');
+        } else {
+            $building = new Buildings;
+            $building->place_first_lev = $request->place_first_lev;
+            $building->place_third_lev = $request->place_third_lev;
+            $building->place_zero_lev = $request->place_zero_lev;
+            $building->save();
+
+            $requestArray = $request->all();
+            $requestArray['id_build'] = $building->id_build;
+            $outerEquipmnet = OuterEquipment::create($requestArray);
+            return response()->json('equipment added successfully');
+        }
     }
 
     public function show($id)
@@ -263,6 +292,14 @@ class OuterEquipmentController extends Controller
     }
 
     public function destroy($id)
+    {
+        $outerEquipment = OuterEquipment::find($id);
+        $outerEquipment->delete();
+
+        return response()->json('OuterEquipment removed successfully');
+    }
+
+    public function destroyOuterEquipAndItsLocation($id)
     {
         $outerEquipment = OuterEquipment::find($id);
         $outerEquipment->delete();
