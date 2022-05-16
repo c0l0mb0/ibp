@@ -20,8 +20,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     $router->get('/outerequipall', 'OuterEquipmentController@index');
 
-    $router->get('/outerinnerequip', 'OuterEquipmentController@indexOuterAndInner');
-    $router->post('/indexouterandinnerbyfirstlevvalue', 'OuterEquipmentController@indexOuterAndInnerByFirstLevValue');
+    $router->get('/outerinnerequip', 'OuterEquipmentController@indexBuildingOuterAndInner');
+    $router->post('/indexouterandinnerbyfirstlevvalue', 'OuterEquipmentController@indexBuildingOuterInnerByFirstLevValue');
 
     $router->post('/outerequip', 'OuterEquipmentController@create');
     $router->post('/outerequipwithlocation', 'OuterEquipmentController@createWithLocation');

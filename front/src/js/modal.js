@@ -32,14 +32,11 @@ ui.modalOuterEquip.formAddOuterEquip.submit(event => {
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
         success: function () {
-            console.log('success')
             _hideError()
             $('#modal-new-equip').modal('hide');
             $("#form_outer-equipment-and-location").trigger("reset");
-            $.getJSON("http://ibp/api/public/index.php/api/v1/outerequipall", function (data) {
-                arr = Object.values(data);
-                gridOptions.api.setRowData(arr);
-            });
+            let data = getData("http://ibp/api/public/index.php/api/v1/outerequipall")
+            ibpAgGrid.setGridData(data);
         },
         error: function (response) {
             console.log(response)

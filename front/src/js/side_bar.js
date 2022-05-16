@@ -16,6 +16,6 @@ $('.all-equip').on('click', function () {
 
 $('.edit_equip').on('click', function () {
     data = getData('http://ibp/api/public/index.php/api/v1/outerequipall');
-    renderOuterTableAgGrid(data);
+    ibpAgGrid.constructOuterTableAgGrid(data);
     changePageTitle("Приборы");
 });

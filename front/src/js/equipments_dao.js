@@ -1,4 +1,4 @@
-function getData (url) {
+function getData(url) {
     var data = {};
     $.ajax({
         url: url,
@@ -45,3 +45,17 @@ function getEquipmentByFirstLevelName(FirstLevelName) {
     });
 }
 
+function deleteOuterEquipAndLocation(id, succesDelCallback) {
+
+    $.ajax({
+        url: config.api.deleteOuterEquipAndItsLocation + '/' + id,
+        method: 'DELETE',
+        data: id,
+        contentType: 'application/x-www-form-urlencoded',
+        dataType: 'json'
+    }).done(function (response) {
+        succesDelCallback();
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+
+    });
+}
