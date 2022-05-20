@@ -1,21 +1,21 @@
-jQuery(function ($) {
-    var data = getData('http://ibp/api/public/index.php/api/v1/listofobjects');
-    createListOfObjects(data);
-
-});
-
 $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
 });
 
 $('.all-equip').on('click', function () {
-    var data = getData('http://ibp/api/public/index.php/api/v1/outerinnerequip');
-    renderOuterInterTableStatement(data);
-    changePageTitle("Все оборудовние и компоненты");
+    // ibpAgGridOuterAndLocation = new IbpAgGrid(buildingAndOuterGridOptions, getData(config.api.getDataBuildingAndOuter));
+    // changePageTitle("Состояние");
 });
 
-$('.edit_equip').on('click', function () {
-    data = getData('http://ibp/api/public/index.php/api/v1/outerequipall');
-    ibpAgGrid.constructOuterTableAgGrid(data);
+$('.edit_equip').on('click', () => {
+    ibpAgGridOuterAndLocation = new IbpAgGrid(buildingAndOuterEquipParameters.gridOptions,
+        buildingAndOuterEquipParameters.getDataUrl, buildingAndOuterEquipParameters.delUrl);
     changePageTitle("Приборы");
+    actionMenu.HideOneRowAction();
+});
+
+$('.edit_elements').on('click', () => {
+    // ibpAgGridOuterAndLocation = new IbpAgGrid(buildingAndOuterInnerGridOptions, getData(config.api.getDataBuildingInnerAndOuter));
+    // changePageTitle("Элементы");
+    // actionMenu.HideOneRowAction();
 });

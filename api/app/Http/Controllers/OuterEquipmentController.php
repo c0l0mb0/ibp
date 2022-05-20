@@ -33,53 +33,27 @@ class OuterEquipmentController extends Controller
 
     }
 
-    public function indexBuildingOuterAndInner()
+    public function indexBuildingOuterInner()
     {
         $outerEquipment = DB::table('outer_equipment')
-            ->select(DB::raw('id_outer_equip , id_inner_equip, place_zero_lev, place_first_lev, place_third_lev, affiliate,
-	equip_name,  inner_name, outer_equipment.factory_number as factory_number_outer ,
-	inner_equipment.faсtory_number as factory_number_inner,
-	quant, inner_equipment.year_issue as year_issue_inner, outer_equipment.year_issue as year_issue_outer,
-	inner_equipment.state_tech_condition as state_tech_condition_inner,
-	outer_equipment.state_tech_condition as state_tech_condition_outer'))
+            ->select(DB::raw('*'))
             ->leftJoin('inner_equipment', 'outer_equipment.id_outer_equip', '=', 'inner_equipment.id_outer')
             ->leftJoin('buildings', 'outer_equipment.id_build', '=', 'buildings.id_build')
             ->orderBy('id_outer_equip', 'ASC')
             ->get();
-        $responseHelper = new ResponseHelper();
-        $responseHelper->formatInnerOuterArray($outerEquipment);
-
-
         return response()->json($outerEquipment);
-
     }
 
-
-    public function indexBuildingOuterInnerByFirstLevValue(Request $request)
+    public function indexBuildingOuter()
     {
-        $this->validate($request, [
-            'place_first_lev' => 'required'
-        ]);
-
         $outerEquipment = DB::table('outer_equipment')
-            ->select(DB::raw('id_outer_equip , id_inner_equip, place_zero_lev, place_first_lev, place_third_lev, affiliate,
-	equip_name,  inner_name, outer_equipment.factory_number as factory_number_outer ,
-	inner_equipment.faсtory_number as factory_number_inner,
-	quant, inner_equipment.year_issue as year_issue_inner, outer_equipment.year_issue as year_issue_outer,
-	inner_equipment.state_tech_condition as state_tech_condition_inner,
-	outer_equipment.state_tech_condition as state_tech_condition_outer'))
-            ->leftJoin('inner_equipment', 'outer_equipment.id_outer_equip', '=', 'inner_equipment.id_outer')
+            ->select(DB::raw('*'))
             ->leftJoin('buildings', 'outer_equipment.id_build', '=', 'buildings.id_build')
-            ->where('place_first_lev', $request->place_first_lev)
             ->orderBy('id_outer_equip', 'ASC')
             ->get();
-
-        $responseHelper = new ResponseHelper();
-        $responseHelper->formatInnerOuterArray($outerEquipment);
-
-
         return response()->json($outerEquipment);
     }
+
 
     public function create(Request $request)
     {
@@ -149,10 +123,11 @@ class OuterEquipmentController extends Controller
 
     public function destroyOuterEquipAndItsLocation($id)
     {
+
         $outerEquipment = OuterEquipment::find($id);
         $outerEquipment->delete();
 
-        $building = Buildings::find(intval($outerEquipment->id_outer_equip));
+        $building = Buildings::find($outerEquipment->id_build);
         $building->delete();
 
         return response()->json('OuterEquipment removed successfully');

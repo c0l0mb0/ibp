@@ -1,5 +1,5 @@
 jQuery(function ($) {
-    var data = getData('http://ibp/api/public/index.php/api/v1/listofobjects');
+    var data = getData(config.api.getDataListOfObjects);
     createModalEquipLoactionList(data);
 });
 
@@ -31,12 +31,14 @@ ui.modalOuterEquip.formAddOuterEquip.submit(event => {
         data: inputValues,
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
-        success: function () {
+        success: () => {
             _hideError()
             $('#modal-new-equip').modal('hide');
             $("#form_outer-equipment-and-location").trigger("reset");
-            let data = getData("http://ibp/api/public/index.php/api/v1/outerequipall")
-            ibpAgGrid.setGridData(data);
+            if (ibpAgGridOuterAndLocation.isReady === true) {
+                ibpAgGridOuterAndLocation.setGridData(getData(config.api.getDataBuildingAndOuter));
+            }
+            actionMenu.HideOneRowAction();
         },
         error: function (response) {
             console.log(response)

@@ -204,6 +204,10 @@ a.article:hover {
     width: 19px;
 }
 
+.ag-body-viewport.ag-layout-normal {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
 /*.tooltip {*/
 /*    !*position: relative;*!*/

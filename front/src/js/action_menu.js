@@ -7,10 +7,14 @@ var actionMenu = {
         $('.delete-table-row').hide();
         $('.show-inner').hide();
     },
-    showNewRowAction: () =>$('.new-table-row').show(),
+    showNewRowAction: () => $('.new-table-row').show(),
     showOneRowAction: () => {
         $('.delete-table-row').show();
         $('.show-inner').show();
+    },
+    HideOneRowAction: () => {
+        $('.delete-table-row').hide();
+        $('.show-inner').hide();
     }
 };
 

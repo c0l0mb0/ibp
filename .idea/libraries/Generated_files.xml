@@ -2,10 +2,22 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/front/src/js/action_menu.min.js" />
+        <item url="file://$PROJECT_DIR$/front/src/js/aggrid.min.js" />
+        <item url="file://$PROJECT_DIR$/front/src/js/app.min.js" />
+        <item url="file://$PROJECT_DIR$/front/src/js/equipments_dao.min.js" />
+        <item url="file://$PROJECT_DIR$/front/src/js/modal.min.js" />
+        <item url="file://$PROJECT_DIR$/front/src/js/side_bar.min.js" />
         <item url="file://$PROJECT_DIR$/vendor/ag grid/ag-grid-community.min.min.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/front/src/js/action_menu.min.js" />
+      <root url="file://$PROJECT_DIR$/front/src/js/aggrid.min.js" />
+      <root url="file://$PROJECT_DIR$/front/src/js/app.min.js" />
+      <root url="file://$PROJECT_DIR$/front/src/js/equipments_dao.min.js" />
+      <root url="file://$PROJECT_DIR$/front/src/js/modal.min.js" />
+      <root url="file://$PROJECT_DIR$/front/src/js/side_bar.min.js" />
       <root url="file://$PROJECT_DIR$/vendor/ag grid/ag-grid-community.min.min.js" />
     </CLASSES>
     <JAVADOC />
