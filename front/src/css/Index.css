@@ -1,16 +1,10 @@
-/*
-    DEMO STYLE
-*/
-
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -102,10 +96,12 @@ a[aria-expanded="true"] {
     color: #fff;
     background: #6d7fcc;
 }
+
 .sidebar-container {
     display: flex;
     flex-direction: column;
 }
+
 .
 a[data-toggle="collapse"] {
     position: relative;
@@ -147,13 +143,14 @@ a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
+
 /*.objects_first_lev {*/
 /*    height: 200px;*/
 /*}*/
 .scroll-strict_height {
     overflow: hidden;
     overflow-y: auto;
-    max-height:  280px;
+    max-height: 280px;
 }
 
 /* ---------------------------------------------------
@@ -178,27 +175,34 @@ a.article:hover {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
 #app {
     height: 100%;
 }
+
 .equip_info {
 }
+
 .equip_info-inner {
     height: 100%;
     width: 100%;
 }
+
 .read-one-equip-button {
     width: 80px;
     background-color: #0dcaf0;
     border-color: #0dcaf0;
 }
+
 .row-menue {
     display: flex;
     margin-left: 40px;
 }
-.row-menue>* {
+
+.row-menue > * {
     margin-left: 20px;
 }
+
 .row-menue__icon {
     height: 19px;
     width: 19px;
@@ -234,8 +238,6 @@ a.article:hover {
 /*.tooltip:hover .tooltiptext {*/
 /*    visibility: visible;*/
 /*}*/
-
-
 
 
 /* ---------------------------------------------------

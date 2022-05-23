@@ -54,6 +54,12 @@ class OuterEquipmentController extends Controller
         return response()->json($outerEquipment);
     }
 
+    public function showInnerByOuterId($idOuter)
+    {
+        $innerEquipments = OuterEquipment::find($idOuter)->innerEquip;
+        return response()->json($innerEquipments);
+    }
+
 
     public function create(Request $request)
     {
@@ -123,15 +129,10 @@ class OuterEquipmentController extends Controller
 
     public function destroyOuterEquipAndItsLocation($id)
     {
-
         $outerEquipment = OuterEquipment::find($id);
         $outerEquipment->delete();
-
         $building = Buildings::find($outerEquipment->id_build);
         $building->delete();
-
         return response()->json('OuterEquipment removed successfully');
-
     }
-
 }

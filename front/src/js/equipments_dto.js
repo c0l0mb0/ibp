@@ -1,6 +1,7 @@
 var config = {
     api: {
         postOuterEquipAndLocation: 'http://ibp/api/public/index.php/api/v1/outerequipwithlocation',
+        postInnerEquipByOuterId:'http://ibp/api/public/index.php/api/v1/innerequip',
 
         deleteOuterEquipAndItsLocation: 'http://ibp/api/public/index.php/api/v1/outerequipwithlocation',
         deleteInnerEquip: 'http://ibp/api/public/index.php/api/v1/innerequip',
@@ -9,6 +10,7 @@ var config = {
         getDataBuildingInnerAndOuter: 'http://ibp/api/public/index.php/api/v1/indexbuildingouterinner',
         getDataBuildingInnerAndOuterByOuterId: 'http://ibp/api/public/index.php/api/v1/indexbuildingouterinner',
         getDataListOfObjects: 'http://ibp/api/public/index.php/api/v1/listofobjects',
+        getInnerByOuterId: 'http://ibp/api/public/index.php/api/v1/showinnerbyouterid',
 
         setOuterEquipmentRowById: 'http://ibp/api/public/index.php/api/v1/outerequip',
         setInnerEquipmentRowById: 'http://ibp/api/public/index.php/api/v1/innerequip'

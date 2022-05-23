@@ -12,7 +12,7 @@ var actionMenu = {
         $('.delete-table-row').show();
         $('.show-inner').show();
     },
-    HideOneRowAction: () => {
+    hideOneRowAction: () => {
         $('.delete-table-row').hide();
         $('.show-inner').hide();
     }

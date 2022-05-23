@@ -8,10 +8,11 @@ $('.all-equip').on('click', function () {
 });
 
 $('.edit_equip').on('click', () => {
-    ibpAgGridOuterAndLocation = new IbpAgGrid(buildingAndOuterEquipParameters.gridOptions,
-        buildingAndOuterEquipParameters.getDataUrl, buildingAndOuterEquipParameters.delUrl);
+    ibpAgGrid = new IbpAgGrid(buildingAndOuterEquipParameters.gridOptions,
+        buildingAndOuterEquipParameters.getDataUrl, buildingAndOuterEquipParameters.delUrl,buildingAndOuterEquipParameters.idFieldName);
+    setModalOuterFormHtml()
     changePageTitle("Приборы");
-    actionMenu.HideOneRowAction();
+    actionMenu.hideOneRowAction();
 });
 
 $('.edit_elements').on('click', () => {

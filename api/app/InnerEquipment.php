@@ -13,5 +13,8 @@ class InnerEquipment extends Model
         'year_issue', 'year_exploitation', 'fault_reason', 'voltage', 'faсtory_number', 'faсtory_name',
         'purpose', 'inner_name', 'inventory_number', 'state_zip', 'state_tech_condition', 'state_priority',
         'state_request'];
-
+    public function outerEquip()
+    {
+        return $this->belongsTo(OuterEquipment::class, 'id_outer_equip', 'id_outer');
+    }
 }

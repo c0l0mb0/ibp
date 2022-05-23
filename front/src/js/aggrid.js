@@ -1,15 +1,12 @@
-var ibpAgGridOuterAndLocation;
+var ibpAgGrid;
 
 
-var buildingOuterAndInnerEquipParameters = {
+var innerEquipParameters = {
     gridOptions: {
         domLayout: 'autoHeight',
         suppressRowTransform: true,
 
         columnDefs: [
-            {headerName: "Место", field: "place_third_lev", tooltipField: 'place_third_lev'},
-            {headerName: "Оборудование", field: "equip_name", minWidth: 250, tooltipField: 'equip_name'},
-            {headerName: "ЗавНомер", field: "factory_number", tooltipField: 'factory_number'},
             {headerName: "Элемент", field: "inner_name", minWidth: 250, tooltipField: 'inner_name'},
             {headerName: "ЗавНомЭлемента", field: "faсtory_number_inner", tooltipField: 'faсtory_number_inner'},
             {headerName: "Количество", field: "quant", tooltipField: 'quant'},
@@ -36,12 +33,12 @@ var buildingOuterAndInnerEquipParameters = {
         },
         enableBrowserTooltips: true,
         onCellValueChanged: function (event) {
-            setRowById(event.data.id_outer_equip, event.data, config.api.setInnerEquipmentRowById);
+            setRowById(event.data.id_inner_equip, event.data, config.api.setInnerEquipmentRowById);
         },
         onRowSelected:
 
             function () {
-                actionMenu.showOneRowAction();
+                actionMenu.deleteTableRow.show();
             }
 
         ,
@@ -49,8 +46,9 @@ var buildingOuterAndInnerEquipParameters = {
             params.api.sizeColumnsToFit();
         }
     },
-    getDataUrl: config.api.getDataBuildingInnerAndOuter,
-    delUrl: config.api.deleteInnerEquip
+    getDataUrl: config.api.getInnerByOuterId,
+    delUrl: config.api.deleteInnerEquip,
+    idFieldName: 'id_inner_equip'
 }
 
 
@@ -89,21 +87,25 @@ var buildingAndOuterEquipParameters = {
         }
     },
     getDataUrl: config.api.getDataBuildingAndOuter,
-    delUrl: config.api.deleteOuterEquipAndItsLocation
+    delUrl: config.api.deleteOuterEquipAndItsLocation,
+    idFieldName: 'id_outer_equip'
 }
 
 
 class IbpAgGrid {
+    idFieldName;
     gridOptions;
     getDataUrl;
     delUrl;
     isReady = true;
     targetId = '#page-content';
+    currentIdOuter;
 
-    constructor(gridOptions, getDataUrl, delUrl) {
+    constructor(gridOptions, getDataUrl, delUrl, idFieldName) {
         this.gridOptions = gridOptions;
         this.getDataUrl = getDataUrl;
         this.delUrl = delUrl;
+        this.idFieldName = idFieldName;
         this.renderOuterTableAgGrid();
     }
 
@@ -123,19 +125,34 @@ class IbpAgGrid {
         this.isReady = true;
     }
 
+    getCurrentIdOuter() {
+        return this.currentIdOuter;
+    }
+
+    getIdFieldName() {
+        return this.idFieldName;
+    }
+
+    setCurrentIdOuter(currentIdOuter) {
+        this.currentIdOuter = currentIdOuter;
+    }
+
     setGridData(data) {
         this.gridOptions.api.setRowData(Object.values(data));
     }
 
     setEditInnerAction() {
+        actionMenu.showInner.off('click');
         actionMenu.showInner.on('click', () => {
             let selectedRows = this.gridOptions.api.getSelectedRows()
             if (selectedRows.length > 0) {
                 let selectedRowId = selectedRows[0].id_outer_equip;
-                ibpAgGridOuterAndLocation = new IbpAgGrid(buildingOuterAndInnerEquipParameters.gridOptions,
-                    buildingOuterAndInnerEquipParameters.getDataUrl, buildingOuterAndInnerEquipParameters.delUrl);
+                ibpAgGrid = new IbpAgGrid(innerEquipParameters.gridOptions,
+                    innerEquipParameters.getDataUrl + '/' + selectedRowId, innerEquipParameters.delUrl, innerEquipParameters.idFieldName);
+                ibpAgGrid.setCurrentIdOuter(selectedRowId)
                 changePageTitle("Элементы");
-                actionMenu.HideOneRowAction();
+                setModalInnerFormHtml();
+                actionMenu.hideOneRowAction();
             } else {
                 return false;
             }
@@ -145,16 +162,16 @@ class IbpAgGrid {
 
     setDeleteButtonAction() {
         let successDelete = () => {
-            let data = this.getData();
-            this.setGridData(data);
+            this.setGridData(getData(this.getDataUrl));
         }
-
+        actionMenu.deleteTableRow.off('click');
         actionMenu.deleteTableRow.on('click', () => {
             let selectedRows = this.gridOptions.api.getSelectedRows()
             if (selectedRows.length > 0) {
-                let selectedRowId = selectedRows[0].id_outer_equip;
+                let selectedRowId = selectedRows[0][this.idFieldName];
                 deleteById(selectedRowId, successDelete, this.delUrl);
-                actionMenu.HideOneRowAction();
+                actionMenu.hideOneRowAction();
+                actionMenu.showInner.hide();
             } else {
                 return false;
             }
