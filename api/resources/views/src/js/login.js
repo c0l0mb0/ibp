@@ -9,7 +9,6 @@ var app = (function ($) {
 
     var config = {
         api: {
-            // login: '/admin/api/v1/auth/login'
             login: 'http://ibp/api/public/index.php/api/v1/login'
         }
     };
@@ -33,8 +32,7 @@ var app = (function ($) {
             contentType: 'application/x-www-form-urlencoded',
             dataType: 'json',
             success: function () {
-                // window.location.replace("http://stackoverflow.com");
-                // document.location.reload();
+                window.location.replace("http://ibp/front/index.html");
             },
             error: function (response) {
                 _showError("Ошибка, попробуйте еще раз");

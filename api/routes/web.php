@@ -14,6 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     $router->post('login/','UsersController@authenticate');
@@ -39,6 +40,5 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->delete('/innerequip/{id}', 'InnerEquipmentController@destroy');
 
     $router->get('/listofobjects', 'BuildingsController@listOfObjects');
-
 
 });
